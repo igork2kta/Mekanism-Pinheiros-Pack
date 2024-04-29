@@ -78,6 +78,7 @@ public class GearConfig extends BaseMekanismConfig {
     public final CachedFloatValue armoredFreeRunnerKnockbackResistance;
     //Jetpack
     public final CachedLongValue jetpackMaxGas;
+    public final CachedLongValue jetpackGasConsumption;
     public final CachedLongValue jetpackFillRate;
     //Armored Jetpack
     public final CachedIntValue armoredJetpackArmor;
@@ -238,6 +239,8 @@ public class GearConfig extends BaseMekanismConfig {
         builder.comment("Jetpack Settings").push(JETPACK_CATEGORY);
         jetpackMaxGas = CachedLongValue.wrap(this, builder.comment("Jetpack Gas Tank capacity in mB.")
               .defineInRange("maxGas", 24_000, 1, Long.MAX_VALUE));
+        jetpackGasConsumption = CachedLongValue.wrap(this, builder.comment("Jetpack Gas Consumption in mB.")
+                .defineInRange("gasConsumption", 1, 1, Long.MAX_VALUE));
         jetpackFillRate = CachedLongValue.wrap(this, builder.comment("Amount of hydrogen the Jetpack can accept per tick.")
               .defineInRange("fillRate", 16, 1, Long.MAX_VALUE));
         builder.comment("Armored Jetpack Settings").push(ARMORED_SUBCATEGORY);

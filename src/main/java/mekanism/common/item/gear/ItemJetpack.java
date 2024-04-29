@@ -84,7 +84,7 @@ public class ItemJetpack extends ItemGasArmor implements IItemHUDProvider, IMode
 
     @Override
     public void useJetpackFuel(ItemStack stack) {
-        useGas(stack, 1);
+        useGas(stack, MekanismConfig.gear.jetpackGasConsumption.getAsLong());
     }
 
     public void setMode(ItemStack stack, JetpackMode mode) {
