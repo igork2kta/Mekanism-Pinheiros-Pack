@@ -15,8 +15,17 @@ public class TileEntityTypeDeferredRegister extends WrappedDeferredRegister<Bloc
         super(modid, ForgeRegistries.BLOCK_ENTITY_TYPES);
     }
 
+    public <BE extends TileEntityMekanism> TileEntityTypeRegistryObject<BE> register(BlockRegistryObject<?, ?> block, BlockEntitySupplier<? extends BE> factory, BlockEntityTicker<BE> serverTicker, BlockEntityTicker<BE> clientTicker) {
+        return this.<BE>builder(block, factory).clientTicker(clientTicker).serverTicker(serverTicker).build();
+    }
+
+    @Deprecated
     public <BE extends TileEntityMekanism> TileEntityTypeRegistryObject<BE> register(BlockRegistryObject<?, ?> block, BlockEntitySupplier<? extends BE> factory) {
-        return this.<BE>builder(block, factory).clientTicker(TileEntityMekanism::tickClient).serverTicker(TileEntityMekanism::tickServer).build();
+        return this_is_not_a_mekanism_tile(block, factory);
+    }
+
+    private <BE extends TileEntityMekanism> TileEntityTypeRegistryObject<BE> this_is_not_a_mekanism_tile(BlockRegistryObject<?, ?> block, BlockEntitySupplier<? extends BE> factory) {
+        return register(block, factory, TileEntityMekanism::tickServer, TileEntityMekanism::tickClient);
     }
 
     public <BE extends BlockEntity> BlockEntityTypeBuilder<BE> builder(BlockRegistryObject<?, ?> block, BlockEntitySupplier<? extends BE> factory) {
